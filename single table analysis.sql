@@ -100,11 +100,61 @@ select title,description,special_features
 from film
 where special_features like '%behind the scenes%';
 
+select * 
+from film;
+
+select distinct rating
+from film;
+
+select rating,count(film_id)
+from film
+group by rating;
+
+select distinct rental_duration
+from film;
+
+select rating,
+count(film_id) as film_rating_count
+from film
+group by(rating);
 
 
+-- Task 7: pull a count of titles sliced by rental duration
 
+select * 
+from film;
 
+select rental_duration,count(title) as film_with_rental_duration
+from film
+group by rental_duration; 
 
+select rental_duration,
+	rating,count(film_id) as rating_rental_duration
+from film
+group by rental_duration,
+	rating;
 
+select rating,
+count(film_id) as film_count,
+min(length) as shortest_film,
+max(length) as longest_film,
+avg(length) as average_length,
+avg(rental_duration) as average_rental_duration
+from film
+group by rating;
+
+/*Task 8:pull a count of film,along with the average,min,
+and max rental rate,grouped by replacement cost*/
+
+select distinct replacement_cost
+from film;
+
+select replacement_cost,
+count(film_id) as no_of_film,
+avg(rental_rate) as average_rental,
+min(rental_rate) as minimum_rental,
+max(rental_rate) as maximum_rental
+from film
+group by(replacement_cost);
 
 	
