@@ -12,8 +12,8 @@ select
 from
 	rental;
 
--- Task 1:Pull a list of the first name,last name and email of
--- each of our customer
+-- Task 1:Pull a list of the first name,last name and email of each of our customer
+
 select 
 	first_name,
     last_name,
@@ -31,6 +31,7 @@ from
 film;
 
 -- Task 2: pull the records of the film and see rental duration
+
 select distinct
 	rental_duration
 from
@@ -51,6 +52,7 @@ payment
 where payment_date>'2006-01-01';
 
 -- Task 3:pull payment from our first 100 customers(based on customer id)
+
 select
 customer_id,rental_id,amount,payment_date
 from payment
@@ -59,8 +61,7 @@ select payment_id,customer_id,rental_id,amount,payment_date
 from payment
 where amount ='0.99'and payment_date >'2005-06-15';
 
--- Task 4:Try to get the data just payments over $5 for those same customer
--- since january 1,2006
+-- Task 4:Try to get the data just payments over $5 for those same customer since january 1,2006
 
 select customer_id,rental_id,amount,payment_date
 from payment
@@ -68,8 +69,7 @@ where customer_id <101
 	and amount >='5' 
     and payment_date >'2006-01-01';
     
--- Task 5:write a query to pull all payment from the customer(42,53,60,75)
--- along with payment over $5 from any customer
+-- Task 5:write a query to pull all payment from the customer(42,53,60,75) along with payment over $5 from any customer
 
 select customer_id,rental_id,amount,payment_date
 from payment
@@ -156,5 +156,53 @@ min(rental_rate) as minimum_rental,
 max(rental_rate) as maximum_rental
 from film
 group by(replacement_cost);
+ 
+ select *
+ from rental;
+ 
+ SELECT 
+    customer_id, COUNT(rental_id) AS total_rentals
+FROM
+    rental
+GROUP BY customer_id
+HAVING COUNT(rental_id) >= 30;
 
+/* Task 9:Pull the list of customer_id with less than 15 rental 
+all time*/
+ 
+ select 
+	customer_id,count(rental_id) as total_rentals
+from
+	rental
+group by customer_id
+having count(rental_id) < 15;
+
+select *
+from
+payment;
+
+select 
+	customer_id,sum(amount) as amount_per_customer
+from payment
+group by customer_id
+order by sum(amount) desc;
+
+select 
+	customer_id,rental_id,amount,payment_date
+from payment
+order by amount desc;
+
+/* Task 10:Pull a list of all film title along with their length
+and rental rates and sort them from longest to shortest*/
+
+select *
+from film;
+
+select 
+	title,length,rental_rate
+from film;
+
+select title,length,rental_rate
+from film
+order by length desc,rental_rate desc;
 	
