@@ -206,3 +206,44 @@ select title,length,rental_rate
 from film
 order by length desc,rental_rate desc;
 	
+    use mavenmovies;
+    
+select distinct length
+from film;
+
+select distinct
+	length,
+	case
+		when length<60 then'under 1 hr'
+		when length between 60 and 90 then '1-1.5 hr'
+		when length >90 then 'over 1.5 hr'
+		else 'check logic'
+	end as length_bucket	
+from film;
+
+select distinct title
+from film; 
+select DISTINCT LENGTH,
+	case
+		when rental_duration<=4 then 'too short'
+        when rental_rate>=3.99 then 'too expensive'
+        when rating in('NC-17','R') then 'too adult'
+        when length not between 60 and 90 then 'too short or too long'
+        when description like '%shark%' then 'nope has shark'
+		else 'great'
+	end as fit_for_recomm
+from film;
+
+
+/* Task 11.Pull a list of first and last name of all customer and label them
+as store 1 active and inactive ,store 2 active and inactive*/
+SELECT first_name,last_name,
+case
+	when store_id = 1 and active =1 then 'store 1 active'
+    when store_id =1 and active=0 then 'store 1 inactive'
+    when store_id =2 and active =1 then 'store 1 active'
+    when store_id =2 and active =0 then 'store 2 inactive'
+end as store_status
+FROM CUSTOMER;
+
+
