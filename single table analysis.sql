@@ -237,6 +237,7 @@ from film;
 
 /* Task 11.Pull a list of first and last name of all customer and label them
 as store 1 active and inactive ,store 2 active and inactive*/
+
 SELECT first_name,last_name,
 case
 	when store_id = 1 and active =1 then 'store 1 active'
@@ -246,4 +247,27 @@ case
 end as store_status
 FROM CUSTOMER;
 
+use mavenmovies;
 
+select * from inventory;
+
+select distinct store_id from inventory;
+select film_id,
+count(inventory_id) as total_copies,
+count(case when store_id =1 then inventory_id else null end) as store_1,
+count(case when store_id =2 then inventory_id else null end) as store_2
+from inventory
+group by film_id
+order by film_id;
+
+/* Task 12:create a table to count the number of customers broken down
+by store_id(in rows) and active status(in columns)*/
+
+select customer_id,store_id,active
+ from customer;
+ 
+ select store_id,
+ count(case when active =1 then customer_id else null end) as active_customer,
+ count(case when active=0 then customer_id else null end) as inactive_customer
+ from customer
+ group by store_id
