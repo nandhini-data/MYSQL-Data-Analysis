@@ -270,4 +270,33 @@ select customer_id,store_id,active
  count(case when active =1 then customer_id else null end) as active_customer,
  count(case when active=0 then customer_id else null end) as inactive_customer
  from customer
- group by store_id
+ group by store_id;
+ 
+ -- Task 13:Which actors have the first name 'scarlett'
+ 
+ select * from actor;
+ 
+ select *
+ from actor
+ where first_name ='SCARLETT';
+ 
+ -- Task 14:Which actors have last name 'johansson'
+ 
+ select * 
+ from actor
+ where last_name ='JOHANSSON';
+ 
+ -- Task 15:How many distinct actor last names are there?
+ 
+ select count(distinct(last_name))
+ from actor;
+ 
+ -- Task 16:Which last name appear more than once
+ 
+ select last_name,count(actor_id) 
+ from actor
+ group by last_name
+ having count(actor_id)>1;
+ 
+ 
+ 
