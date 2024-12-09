@@ -298,5 +298,17 @@ select customer_id,store_id,active
  group by last_name
  having count(actor_id)>1;
  
+ use mavenmovies;
+ 
+ -- Task 17:Display the first and last name of actor in a single column in upper case letter.
+ 
+ select first_name,last_name from actor;
+ 
+ select concat(first_name,' ',last_name) as full_name
+ from actor;
+ 
+ 
+ 
+ 
  
  
